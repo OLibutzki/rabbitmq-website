@@ -352,7 +352,7 @@ endpoints require the token to be passed in the `token` query string parameter.
 
 At a minimum, RabbitMQ requires the the `openid` scope because it uses some claims in the *id token* to determine the username and to display this username on the top right corner of the management UI. The *id token* is returned by the Authorization server if the `openid` scope is included in the authorization request.
 
-RabbitMQ reads the `user_name` claim from the *id_token*. If the token does not contain the `user_name`, RabbitMQ uses the `sub` claim. 
+RabbitMQ reads the `user_name` claim from the *id_token*. If the token does not contain the `user_name`, RabbitMQ uses the `sub` claim.
 
 ### Configure which scopes RabbitMQ requests to the authorization server
 
@@ -372,6 +372,8 @@ authorization server. It may be <*resource_server_id*>`.*` if you want to reques
 such as:
   * <*resource_server_id*>`.tag:administrator`
   * <*resource_server_id*>`.read:*/*/*`
+
+We use the setting `management.oauth_scopes` to configure the scopes. It is a space-separated field. 
 
 ### Configure OpenID Connect Discovery endpoint
 
@@ -395,6 +397,7 @@ For instance, if you configured the CSP header with the value `default-src 'self
 
 In addition to the `connect-src` CSP header, RabbitMQ also needs the CSP directives `unsafe-eval` `unsafe-inline`, otherwise the OAuth 2.0 functionality may not work.
 
+### Identity-Provider initiated logon
 
 ## <a id="http-api" class="anchor" href="#http-api">HTTP API</a>
 
